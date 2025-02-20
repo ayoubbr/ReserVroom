@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 // User
-Route::get('/', function () {
-    return view('rooms');
-});
-
+Route::get('/', [RoomController::class, 'index'])->name('rooms.index');
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
+Route::get('/rooms/show/{id}', [RoomController::class, 'show'])->name('rooms.show');
 Route::get('/reservation/create/{id}', [ReservationController::class, 'create'])->name('reservations.create');
 Route::post('/reservation/store', [ReservationController::class, 'store'])->name('reservations.store');
+Route::get('/reservation/index', [ReservationController::class, 'index'])->name('reservations.index');
+Route::delete('/reservation/cancel/{id}', [ReservationController::class, 'cancel'])->name('reservations.cancel');
 
 
 // Admin

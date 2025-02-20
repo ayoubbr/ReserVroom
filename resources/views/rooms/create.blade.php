@@ -6,6 +6,7 @@
     <title>Create New Room</title>
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ URL::asset('css/create.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
 </head>
 <body class="bg-gray-100">
     <div class="min-h-screen py-6 flex flex-col justify-center sm:py-12">

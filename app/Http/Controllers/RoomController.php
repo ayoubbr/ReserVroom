@@ -8,15 +8,24 @@ use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
+
+    public function show($id)
+    {
+        $room = Room::find($id);
+        return view('rooms.show', compact('room'));
+    }
+
     public function index()
     {
         $rooms = Room::where('status', 'Available')->get();
         return view('rooms.index', compact('rooms'));
     }
+
     public function create()
     {
         return view('rooms.create');
     }
+    
     public function store(Request $request)
     {
         $room = new Room();
@@ -58,13 +67,13 @@ class RoomController extends Controller
         $room->description = $request->input('description');
         $room->city = $request->input('city');
         $room->price = $request->input('price');
+        $room->status = $request->input('status');
         $room->seats = $request->input('seats');
         $room->photo = $request->input('photo');
 
         $room->save();
         return redirect(route('admin.dashboard'));
     }
-
 
     public function admin()
     {

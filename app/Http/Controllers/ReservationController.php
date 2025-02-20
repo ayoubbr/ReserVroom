@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
+
+    public function index()
+    {
+        $reservations = Reservation::with('room')
+            ->orderBy('check_in', 'desc')
+            ->get();
+        return view('reservations.index', compact('reservations'));
+    }
+
     public function create($id)
     {
         $room = Room::find($id);
@@ -64,5 +73,16 @@ class ReservationController extends Controller
         $room->save();
 
         return redirect('/admin');
+    }
+
+    public function cancel($id)
+    {
+        $reservation = Reservation::find($id);
+        $room = Room::find($reservation->room_id);
+        $reservation->delete();
+        $room->status = 'Available';
+        $room->save();
+
+        return redirect('/reservation/index');
     }
 }

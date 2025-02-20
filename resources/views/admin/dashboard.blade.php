@@ -21,7 +21,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
         }
 
         body {
@@ -114,7 +113,8 @@
             display: inline-block;
         }
 
-        .status-available, .status-accepted {
+        .status-available,
+        .status-accepted {
             background: #dcfce7;
             color: var(--success-color);
         }
@@ -209,6 +209,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
 </head>
 
 <body>
@@ -282,8 +283,8 @@
                             <td>{{ $reservation->id }}</td>
                             <td>{{ $reservation->room->title }}</td>
                             {{-- <td>{{ $reservation->user->name }}</td> --}}
-                            <td>{{ date('d-m-Y H:m', strtotime($reservation->check_in)) }}</td>
-                            <td>{{ date('d-m-Y H:m', strtotime($reservation->check_out)) }} </td>
+                            <td>{{ date('d-M-Y H:i', strtotime($reservation->check_in)) }}</td>
+                            <td>{{ date('d-M-Y H:i', strtotime($reservation->check_out)) }} </td>
                             <td>
                                 <span class="status status-{{ strtolower($reservation->status) }}">
                                     {{ $reservation->status }}

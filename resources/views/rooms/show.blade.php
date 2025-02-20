@@ -23,6 +23,7 @@
         }
 
         body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
             background: var(--gray-light);
             color: var(--gray-dark);
             line-height: 1.5;
@@ -244,6 +245,7 @@
         }
     </style>
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+
 </head>
 
 <body>
