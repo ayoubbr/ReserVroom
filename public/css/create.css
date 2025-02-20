@@ -1,0 +1,245 @@
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --text-primary: #1f2937;
+    --text-secondary: #4b5563;
+    --border-color: #e5e7eb;
+    --background-light: #f9fafb;
+    --input-focus: #3b82f6;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    background: var(--background-light);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+.min-h-screen {
+    min-height: 100vh;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.relative {
+    position: relative;
+    max-width: 36rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.bg-white {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    margin: 0 1rem;
+}
+
+.max-w-md {
+    max-width: 28rem;
+    margin: 0 auto;
+}
+
+/* Header styles */
+.flex.items-center {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.h-14 {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: #bfdbfe;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.block.pl-2 h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.block.pl-2 p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Form styles */
+.divide-y {
+    border-top: 1px solid var(--border-color);
+    margin-top: 1.5rem;
+    padding-top: 2rem;
+}
+
+.space-y-4 {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.flex.flex-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+    background: var(--white);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Button styles */
+.pt-4 {
+    padding-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+button {
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+button[type="button"] {
+    background: var(--background-light);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+button[type="button"]:hover {
+    background: var(--border-color);
+}
+
+button[type="submit"] {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+button[type="submit"]:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* SVG icon styles */
+svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+    .bg-white {
+        padding: 1.5rem;
+        margin: 0 0.5rem;
+    }
+
+    .pt-4 {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .h-14 {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .block.pl-2 h2 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bg-white {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Hover effects */
+.h-14:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* Error states */
+input:invalid,
+textarea:invalid {
+    border-color: #ef4444;
+}
+
+/* Placeholder styles */
+::placeholder {
+    color: #9ca3af;
+}
