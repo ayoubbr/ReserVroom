@@ -25,11 +25,63 @@ class ReservationController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
-        // $validated = $request->validate([
-        //     'check_in' => 'required|date|after:now',
-        //     'check_out' => 'required|date|after:check_in',
-        // ]);
+        $validated = $request->validate([
+            'check_in' => 'required|date|after:now',
+            'check_out' => 'required|date|after:check_in',
+        ]);
+
+        $reservations = Reservation::where('room_id', $request->room_id)
+            // ->where('status', 'Accepted')
+            ->orderBy('check_in', 'ASC')
+            ->get();
+
+        $date_in = str_replace('T', ' ', $request->check_in) . ':00';
+        $date_out = str_replace('T', ' ', $request->check_out) . ':00';
+        $counter = 0;
+
+        if (count($reservations) > 0) {
+            foreach ($reservations as $key => $reservation) {
+
+                $date1 = date_create($date_in);
+                $date2 = date_create($reservation->check_in);
+                $diff = date_diff($date1,  $date2);
+                $diff = $diff->format('%R');
+
+                if ($diff == "+") {
+                    $date1 = date_create($date_out);
+                    $date2 = date_create($reservation->check_in);
+                    $diff = date_diff($date1,  $date2);
+                    $diff = $diff->format('%R');
+
+                    if ($diff == "+") {
+                        $counter++;
+                    }
+                }
+
+                if ($diff == "-") {
+                    $date1 = date_create($date_in);
+                    $date2 = date_create($reservation->check_out);
+                    $diff = date_diff($date1, targetObject: $date2);
+                    $diff = $diff->format('%R');
+
+                    if ($date_in == $reservation->check_out || $diff == "-") {
+                        $counter++;
+                    }
+                }
+            }
+
+            if ($counter == count($reservations)) {
+                $this->save($request);
+            }
+        } else {
+            $this->save($request);
+        }
+
+        return redirect('/rooms');
+    }
+
+    private function save(Request $request)
+    {
         $reservation = new Reservation();
         $reservation->room_id = $request->room_id;
         $reservation->status = 'Pending';
@@ -37,22 +89,17 @@ class ReservationController extends Controller
         $reservation->check_out = $request->check_out;
 
         $room = Room::find($request->room_id);
-        $room->status = 'Pending reservation';
+
         $room->save();
         $reservation->save();
-
-        // dd($room, $reservation);
-        return redirect('/rooms');
     }
 
     public function accept($id)
     {
         $reservation = Reservation::find($id);
-        // dd($reservation);
+
         $reservation->status = 'Accepted';
         $room = Room::find($reservation->room_id);
-        // dd($room);
-        $room->status = 'Booked';
 
         $reservation->save();
         $room->save();
@@ -63,11 +110,9 @@ class ReservationController extends Controller
     public function reject($id)
     {
         $reservation = Reservation::find($id);
-        // dd($reservation);
+
         $reservation->status = 'Rejected';
         $room = Room::find($reservation->room_id);
-        // dd($room);
-        $room->status = 'Available';
 
         $reservation->save();
         $room->save();
@@ -78,10 +123,7 @@ class ReservationController extends Controller
     public function cancel($id)
     {
         $reservation = Reservation::find($id);
-        $room = Room::find($reservation->room_id);
         $reservation->delete();
-        $room->status = 'Available';
-        $room->save();
 
         return redirect('/reservation/index');
     }

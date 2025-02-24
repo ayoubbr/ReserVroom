@@ -131,7 +131,7 @@
             color: var(--success);
         }
 
-        .status-booked {
+        .status-unavailable {
             color: var(--danger);
         }
 
@@ -229,8 +229,8 @@
                         <select id="status" name="status" class="form-control" required>
                             <option value="Available" {{ $room->status === 'Available' ? 'selected' : '' }}
                                 class="status-available">Available</option>
-                            <option value="Booked" {{ $room->status === 'Booked' ? 'selected' : '' }}
-                                class="status-booked">Booked</option>
+                            <option value="Unavailable" {{ $room->status === 'Unavailable' ? 'selected' : '' }}
+                                class="status-unavailable">Unavailable</option>
                             {{-- <option value="pending" {{ $room->status === 'pending' ? 'selected' : '' }} class="status-pending">Pending Reservation</option> --}}
                         </select>
                     </div>

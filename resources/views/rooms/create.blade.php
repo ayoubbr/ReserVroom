@@ -49,7 +49,7 @@
                                     class="px-4 py-2 border focus:ring-blue-500 focus:border-blue-500 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none">
                             </div>
                             <div class="flex flex-col">
-                                <label class="leading-loose">Price per Night</label>
+                                <label class="leading-loose">Price per Day</label>
                                 <input type="number" name="price" required min="0" step="0.01"
                                     class="px-4 py-2 border focus:ring-blue-500 focus:border-blue-500 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none">
                             </div>

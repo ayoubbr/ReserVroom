@@ -119,7 +119,7 @@
             color: var(--success-color);
         }
 
-        .status-booked,
+        .status-unavailable,
         .status-rejected {
             background: #fee2e2;
             color: var(--danger-color);
